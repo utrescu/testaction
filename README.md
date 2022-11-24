@@ -37,4 +37,3 @@ El problema bàsic és que un `git push` en una branca
 que està en pull request fa que s'executi dues vegades
 
 ![Captura de pantalla de 2022-11-24 14-13-25](https://user-images.githubusercontent.com/2011002/203793209-8c2427f0-30b4-41a5-8f12-d39c8fd82f08.png)
-

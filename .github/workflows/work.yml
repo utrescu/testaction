@@ -7,17 +7,33 @@ on:
       - "*"
 
 jobs:
-  buid:
+  # see: https://github.com/fkirc/skip-duplicate-actions
+  skip_duplicate:
+    continue-on-error: true
     runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@master
+        with:
+          concurrent_skipping: "same_content_newer"
+          skip_after_successful_duplicate: "true"
+          do_not_skip: '["pull_request", "workflow_dispatch", "schedule", "release"]'
+
+  buid:
+    needs: skip_duplicate
+    runs-on: ubuntu-latest
+    if: ${{ needs.skip_duplicate.outputs.should_skip != 'true' }}
     steps:
       - name: build
         run: echo "BUILD"
 
   deploy:
     runs-on: ubuntu-latest
+    if: (github.event_name == 'pull_request' && github.event.action != 'closed')
     steps:
       - name: deploy fase 1
         run: echo "DEPLOY start"
       - name: desploy fase 2
         run: echo "DEPLOY end"
-
