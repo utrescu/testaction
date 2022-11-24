@@ -35,4 +35,5 @@ jobs:
 
 El problema bàsic és que un `git push` en una branca
 que està en pull request fa que s'executi dues vegades
-...
+
+
