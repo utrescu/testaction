@@ -1,5 +1,5 @@
 on:
-  push:
+  pull_request:
     branches:
       - "*"
 
@@ -13,3 +13,12 @@ jobs:
     steps:
       - name: build
         run: echo "BUILD"
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy fase 1
+        run: echo "DEPLOY start"
+      - name: desploy fase 2
+        run: echo "DEPLOY end"
+
