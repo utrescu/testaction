@@ -15,9 +15,9 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    if: (github.event_name == 'pull_request' && github.event.action != 'closed')
     steps:
       - name: deploy fase 1
         run: echo "DEPLOY start"
       - name: desploy fase 2
         run: echo "DEPLOY end"
-
